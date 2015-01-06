@@ -1,0 +1,15 @@
+
+/* script: helpers.activeArtist */
+/* This script endpoint: /plugin/helpers.activeArtist	*/
+
+http().get(function(req){
+    var exists = Box.DB.existsCollection('artists');
+    if (exists){
+        parameters = {fields:"name,bornDate,wikiURL,nationality,field,image,diedDate,artMovement,genre,_creation_date"};
+        var ret = Box.Documents.find('artists',parameters)
+        return {status: 200,content: ret};
+    }
+    return {status: 400,content:"No artist available"};    
+});
+
+				
